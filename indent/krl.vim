@@ -1,7 +1,7 @@
 " Vim indent file
 " Language:	Kynetx Rule Language (KRL)
-" Maintainer:	None!  Wanna improve this?
-" Last Change:	2010 May 10
+" Maintainer:	AKO & JAM
+" Last Change:	2010 September 1
 
 " Only load this indent file when no other was loaded.
 if exists("b:did_indent")
