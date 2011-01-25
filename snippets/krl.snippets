@@ -1,0 +1,53 @@
+snippet rule
+	rule ${1:rule_name} is active {
+		select when ${2:domain} ${3}
+		pre {
+		}
+		${4}
+	}
+snippet todo
+	// TODO: ${1}
+snippet pick
+	pick("$.${1}");
+snippet ep
+	event:param("${1}");
+snippet if
+	if (${1}) then {
+		${2}
+	}
+snippet httpp
+	http:post("${1:address}") with params = ${2:params hash}
+snippet httpg
+	http:get("${1:address}") with params = ${2:params hash}
+snippet pre
+	pre {
+		${1}
+	}
+snippet sendd
+	send_directive("${1:directive name}") with ${2:param name} = ${3:param}
+snippet raise
+	raise explicit event ${1:event name} with ${2:param name} = ${3:param}
+snippet func
+	${1:name} = function(${2}) {
+		${3}
+	}
+snippet <<
+	<<
+		${1}
+	>>
+snippet emit
+	emit <|
+		${1}
+	|>
+snippet css
+	css <<
+		${1}
+	>>
+snippet dso
+	datasource ${1:name} <- "${2:address}";
+snippet dse
+	dataset ${1:name} <- "${2:address}";
+snippet notify
+	notify("${1}","${2}") ${3:with sticky = true};
+
+
