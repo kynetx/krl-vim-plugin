@@ -1,14 +1,7 @@
 This a vim plugin for krl (Kynex Rule Language) vim support. It includes: 
 	syntax highlighting
-	indentation support
-This is a work-in-progress and will be updated periodically
-Save syntax/krl.vim to ~/.vim/syntax/krl.vim
-Save indent/krl.vim to ~/.vim/indent/krl.vim
+	snippets for use with snipMate (https://github.com/msanders/snipmate.vim)
 
-Add:
-augroup filedetect
-	" Kynetx Rule Language (KRL)
-	au BufNewFile,BufRead *.krl     setf krl
-augroup END
+For installation, we recommend pathogen by Tim Pope (https://github.com/tpope/vim-pathogen). Just clone this repo into your bundle directory. If you aren't using pathogen, then you can install the plugin the old-school way by copying the directories into your .vim directory.
 
-in your ~/.vim/filetype.vim
+I also recommend the PastelsOnDark theme that has KRL specific highlighting at: https://github.com/mikefarmer/pastelsondark-vim
