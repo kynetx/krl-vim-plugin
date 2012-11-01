@@ -65,14 +65,22 @@ function! GetKRLIndent( line_num )
 		endif
 	endif
 
+
+	
+	" If this line ends in } or >>, decrease the indent
+	" We do the close check first to make sure that even if
+	" the previous line was { or << to still unindent.
+	if this_codeline =~ '^\s*\(}\|>>\);\?'
+		if prev_codeline =~ '\s*\({\|<<\)\s*$'
+			return indnt
+		else
+			return indnt - &shiftwidth
+		endif
+	endif
+
 	" If the previous line ends in { or << increase the indent
 	if prev_codeline =~ '\s*\({\|<<\)\s*$'
 		return indnt + &shiftwidth
-	endif
-
-	" If this line ends in } or >>, decrease the indent
-	if this_codeline =~ '^\s*\(}\|>>\);\?'
-		return indnt - &shiftwidth
 	endif
 
 	" These two rules handle the indentation of with/and.
