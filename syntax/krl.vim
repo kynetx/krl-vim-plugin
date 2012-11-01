@@ -6,7 +6,7 @@
 "		(ss) repaired several quoting and grouping glitches
 "		(ss) fixed regex parsing issue with multiple qualifiers [gi]
 "		(ss) additional factoring of keywords, globals, and members
-" Last Change:	2006 Jun 19
+" Last Change: 2012 November 1
 
 if !exists("main_syntax")
   if version < 600
@@ -27,28 +27,40 @@ syn match   krlLineComment      "\/\/.*" contains=@Spell,krlCommentTodo
 syn match   krlCommentSkip      "^[ \t]*\*\($\|[ \t]\+\)"
 syn region  krlComment	       start="/\*"  end="\*/" contains=@Spell,krlCommentTodo
 
+" The emits
 syn region krlEmit matchgroup=Emit start=+emit\s\+<<+ end=+>>+ contains=@JS
-syn region krlCSS matchgroup=Snip start=+css\s\+<<+ end=+>>+ contains=@CSS 
-syn region krlHereDoc matchgroup=Snip start=/<</ end=/>>/ contains=krlString
-syn region krlHTMLHereDoc matchgroup=Snip start=/\w\+\s\+=\s\+<</ end=/>>/ contains=@HTML
 syn region krlClownHat matchgroup=Emit start=/<|/ end=/|>/ contains=@JS
+
+" CSS
+syn region krlCSS matchgroup=Snip start=+css\s\+<<+ end=+>>+ contains=@CSS 
+
+" HTML
+syn region krlHereDoc matchgroup=Snip start=/<</ end=/>>/ contains=@HTML
+syn region krlHTMLHereDoc matchgroup=Snip start=/\w\+\s\+=\s\+<</ end=/>>/ contains=@HTML
+
+" KRL Strings
 syn region krlString start=+"+  skip=+\\\\\|\\"+  end=+"\|$+
 syn region krlString start=+'+  skip=+\\\\\|\\'+  end=+'\|$+
+
+" KRL Regexes
 syn region krlRegexpString start=+/[^/*]+me=e-1 skip=+\\\\\|\\/+ end=+/[gi]\{0,2\}\s*$+ end=+/[gi]\{0,2\}\s*[;.,)\]}]+me=e-1 contains=@perlInterpMatch oneline
 syn region krlNewRegexpString start=+re/[^/*]+me=e-1 skip=+\\\\\|\\/+ end=+/[gi]\{0,2\}\s*$+ end=+/[gi]\{0,2\}\s*[;.,)\]}]+me=e-1 contains=@perlInterpMatch oneline
 syn region krlPoundRegexpString start=+#[^/*]+me=e-1 skip=+\\\\\|\\/+ end=+#[gi]\{0,2\}\s*$+ end=+#[gi]\{0,2\}\s*[;.,)\]}]+me=e-1 contains=@perlInterpMatch oneline
+
+" JSON Path
 syn region krlJSONPath start=+"\$\.+  skip=+\\\\\|\\'+  end=+"\|$+
 syn region krlJSONPath start=+'\$\.+  skip=+\\\\\|\\'+  end=+'\|$+
 
+" Used in Modules
 syn match krlNamespace "\w\+:"he=e-1,me=e-1
 syn match krlMethod ":\w\+"hs=s+1,ms=s+1
 
 syn keyword krlSelect select 
 syn keyword krlDomain domain
-syn keyword krlOptions opacity width sticky message tabColor backgroundColor color delay life divCSS pathToTabImage tabLocation topPos imageWidth imageHeight
+syn keyword krlOptions opacity width sticky message tabColor backgroundColor color delay life divCSS pathToTabImage tabLocation topPos imageWidth imageHeight configure
 syn keyword krlConditional if then fired else neq eq like between not is once within
-syn keyword krlLibraries twitter amazon google odata rss
-syn keyword krlWith with
+syn keyword krlLibraries twitter amazon google odata rss provides
+syn keyword krlWith with using
 syn keyword krlAnd and 
 syn keyword krlKeywords rule every global meta ruleset dispatch choose current module tags
 syn keyword krlAction log noop send_directive after alert annotate_search_results query annotate_local_search_results before float float_html let_it_snow move_after move_to_top noop notify close_notification percolate popup prepend redirect replace peplace_html replace_inner replace_image_src sidetab set_element_attr watch status_bar 
@@ -61,7 +73,7 @@ syn keyword krlReserved names twitterId alias app authz sharing using second web
 
 syn match krlSymbols "==\|=>\||"
 
-syn keyword krlFunction	function
+syn keyword krlFunction	function defaction
 syn match   krlBraces	   "[{}\[\]]"
 syn match   krlParens	   "[()]"
 
